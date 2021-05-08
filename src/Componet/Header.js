@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Header.css";
+import Search from "./Search";
 import HomeIcon from "@material-ui/icons/Home";
 import FlashOnIcon from "@material-ui/icons/FlashOn";
 import LiveTvIcon from "@material-ui/icons/LiveTv";
@@ -8,6 +9,8 @@ import SearchIcon from "@material-ui/icons/Search";
 import PersonOutlineIcon from "@material-ui/icons/PersonOutline";
 
 function Header() {
+  const [showSearch, setShowSearch] = useState(false);
+
   return (
     <div className="header">
       <div className="header__icons">
@@ -29,8 +32,13 @@ function Header() {
           <p>Collection</p>
         </div>
         <div className="header__icon">
-          <SearchIcon />
-          <p>Search</p>
+          {showSearch && <Search />}
+          <SearchIcon
+            onClick={() => setShowSearch(!showSearch)}
+            className="banner_searchButton"
+            variant="outlined"
+          ></SearchIcon>
+          <p>{showSearch ? "Hide" : "Search"}</p>
         </div>
         <div className="header__icon">
           <PersonOutlineIcon />
