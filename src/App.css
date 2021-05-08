@@ -3,5 +3,6 @@
 }
 
 .app {
-  background-color: #111;
+  width: 100vw;
+  background-image: linear-gradient(to right, #051412, #042727);
 }
