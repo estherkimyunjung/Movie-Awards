@@ -7,7 +7,6 @@ function App() {
     <div className="app">
       {/* Header */}
       <Header />
-      {/* NavBar */}
       {/* Banner */}
       {/* Movies 
             // Search Movies
