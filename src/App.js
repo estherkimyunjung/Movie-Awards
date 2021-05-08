@@ -1,15 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { Button, Spinner } from "react-bootstrap";
-
+import keys from "./api/keys";
 import "./App.css";
-import Header from "./componet/Header.js";
-import Banner from "./componet/Banner.js";
-import SearchMovies from "./contanier/SearchMovies";
-import Nominations from "./contanier/Nominations";
+import Header from "./componet/Header";
+import Banner from "./componet/Banner";
+import Results from "./contanier/Results";
 import Footer from "./componet/Footer";
-
-import keys from "./api/keys.js";
 
 function App() {
   const [movies, setMovies] = useState();
@@ -24,7 +21,7 @@ function App() {
     const responseJson = await response.json();
 
     if (responseJson.Search) {
-      console.log(responseJson.Search);
+      // console.log(responseJson.Search);
       setMovies(responseJson.Search);
     }
     setIsLoading(false);
@@ -56,10 +53,10 @@ function App() {
 
           <Switch>
             <Route path="/movies">
-              <SearchMovies movies={movies} searchValue={searchValue} />
+              <Results searchValue={searchValue} movies={movies} />
             </Route>
             <Route path="/nominations">
-              <Nominations movies={movies} />
+              <Results movies={movies} />
             </Route>
           </Switch>
           {/* Footer */}

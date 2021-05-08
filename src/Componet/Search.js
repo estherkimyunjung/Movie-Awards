@@ -10,13 +10,14 @@ function Search({ searchValue, setSearchValue, value }) {
   return (
     <div className="search">
       <h2>
-        Esther's Movie Database <MovieIcon />
+        Esther's Movie Database
+        <MovieIcon />
       </h2>
       <input
         value={value}
         onChange={(e) => setSearchValue(e.target.value)}
         type="text"
-        placeholder="Enter Movie Title Here"
+        placeholder="Please enter movie title here..."
       />
       <Button type="submit" onClick={() => history.push("/movies")}>
         Search Movies...
