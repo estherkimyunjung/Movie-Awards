@@ -1,6 +1,13 @@
 # Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### Tech
+
+- REACT
+- MATERIAL UI, BootStrap
+- FLEXBOX
+- OMDB - API calls to a movie service.
+- React flip move for ANIMATIONS
+- DEPLOY on firebase hosting
 
 ## Available Scripts
 

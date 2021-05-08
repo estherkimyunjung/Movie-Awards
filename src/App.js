@@ -1,9 +1,19 @@
+import React from "react";
 import "./App.css";
+import Header from "./Componet/Header.js";
 
 function App() {
   return (
     <div className="app">
-      <p>Shopify, Esther start building...</p>
+      {/* Header */}
+      <Header />
+      {/* NavBar */}
+      {/* Banner */}
+      {/* Movies 
+            // Search Movies
+            // Awards Movies
+      */}
+      {/* Footer */}
     </div>
   );
 }
