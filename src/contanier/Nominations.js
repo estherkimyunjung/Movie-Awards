@@ -1,9 +1,19 @@
 import React from "react";
+import "./MovieRow.css";
 
-function Nominations() {
+function Nominations({ movies }) {
   return (
-    <div>
-      <h3>Awards Movies Here</h3>
+    <div className="row">
+      <h2>Nominations</h2>
+      <div className="row__posters">
+        {movies.map((movie, index) => (
+          <img
+            className="row__posterLarge"
+            src={movie.Poster}
+            alt="movie poster"
+          />
+        ))}
+      </div>
     </div>
   );
 }
