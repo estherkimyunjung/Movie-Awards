@@ -1,6 +1,6 @@
 import React from "react";
 
-function Award() {
+function Nominations() {
   return (
     <div>
       <h3>Awards Movies Here</h3>
@@ -8,4 +8,4 @@ function Award() {
   );
 }
 
-export default Award;
+export default Nominations;

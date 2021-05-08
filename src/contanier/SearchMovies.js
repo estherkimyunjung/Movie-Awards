@@ -1,6 +1,6 @@
 import React from "react";
 
-function Movies() {
+function SearchMovies() {
   return (
     <div>
       <h2>This is Movie Container</h2>
@@ -8,4 +8,4 @@ function Movies() {
   );
 }
 
-export default Movies;
+export default SearchMovies;

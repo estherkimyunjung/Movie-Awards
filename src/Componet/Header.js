@@ -1,8 +1,9 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import "./Header.css";
 import Search from "./Search";
 import HomeIcon from "@material-ui/icons/Home";
-import FlashOnIcon from "@material-ui/icons/FlashOn";
+import EmojiEventsIcon from "@material-ui/icons/EmojiEvents";
 import LiveTvIcon from "@material-ui/icons/LiveTv";
 import VideoLibraryIcon from "@material-ui/icons/VideoLibrary";
 import SearchIcon from "@material-ui/icons/Search";
@@ -16,12 +17,10 @@ function Header() {
       <div className="header__icons">
         {/* All icons Here */}
         <div className="header__icon header__icon--active">
-          <HomeIcon />
-          <p>Home</p>
-        </div>
-        <div className="header__icon">
-          <FlashOnIcon />
-          <p>Trending</p>
+          <Link className="header__link" to="/">
+            <HomeIcon />
+            <p>Home</p>
+          </Link>
         </div>
         <div className="header__icon">
           <LiveTvIcon />
@@ -31,6 +30,12 @@ function Header() {
           <VideoLibraryIcon />
           <p>Collection</p>
         </div>
+        <Link className="header__link" to="/nominations">
+          <div className="header__icon">
+            <EmojiEventsIcon />
+            <p>Nominations</p>
+          </div>
+        </Link>
         <div className="header__icon">
           {showSearch && <Search />}
           <SearchIcon
@@ -45,7 +50,7 @@ function Header() {
           <p>Login</p>
         </div>
       </div>
-      <img src="./logo425.png" alt="logo image" srcset="" />
+      <img src="./logo425.png" alt="logo" />
     </div>
   );
 }
