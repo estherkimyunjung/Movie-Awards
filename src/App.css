@@ -10,3 +10,9 @@
   width: 100vw;
   background-image: linear-gradient(to right, #051412, #042727);
 }
+
+#loading-text {
+  color: white;
+  font-size: 20px;
+  justify-content: center;
+}

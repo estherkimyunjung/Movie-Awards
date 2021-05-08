@@ -1,11 +1,10 @@
-import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 
 import "./Search.css";
 import { Button } from "@material-ui/core";
 import MovieIcon from "@material-ui/icons/Movie";
 
-function Search() {
+function Search({ searchValue, setSearchValue, value }) {
   const history = useHistory();
 
   return (
@@ -13,8 +12,15 @@ function Search() {
       <h2>
         Esther's Movie Database <MovieIcon />
       </h2>
-      <input type="text" placeholder="Enter Movie Title Here" />
-      <Button onClick={() => history.push("/movies")}>Search Movies...</Button>
+      <input
+        value={value}
+        onChange={(e) => setSearchValue(e.target.value)}
+        type="text"
+        placeholder="Enter Movie Title Here"
+      />
+      <Button type="submit" onClick={() => history.push("/movies")}>
+        Search Movies...
+      </Button>
     </div>
   );
 }

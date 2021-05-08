@@ -9,7 +9,7 @@ import VideoLibraryIcon from "@material-ui/icons/VideoLibrary";
 import SearchIcon from "@material-ui/icons/Search";
 import PersonOutlineIcon from "@material-ui/icons/PersonOutline";
 
-function Header() {
+function Header({ searchValue, setSearchValue }) {
   const [showSearch, setShowSearch] = useState(false);
 
   return (
@@ -17,7 +17,7 @@ function Header() {
       <div className="header__icons">
         {/* All icons Here */}
         <div className="header__icon header__icon--active">
-          <Link className="header__link" to="/">
+          <Link className="header__link" to="/movies">
             <HomeIcon />
             <p>Home</p>
           </Link>
@@ -37,7 +37,9 @@ function Header() {
           </div>
         </Link>
         <div className="header__icon">
-          {showSearch && <Search />}
+          {showSearch && (
+            <Search searchValue={searchValue} setSearchValue={setSearchValue} />
+          )}
           <SearchIcon
             onClick={() => setShowSearch(!showSearch)}
             className="banner_searchButton"

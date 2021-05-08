@@ -8,6 +8,7 @@ function Nominations({ movies }) {
       <div className="row__posters">
         {movies.map((movie, index) => (
           <img
+            key={index}
             className="row__posterLarge"
             src={movie.Poster}
             alt="movie poster"
