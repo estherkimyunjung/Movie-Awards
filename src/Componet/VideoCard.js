@@ -1,10 +1,10 @@
-import React from "react";
+import React, { forwardRef } from "react";
 import "./VideoCard.css";
 import EmojiEventsIcon from "@material-ui/icons/EmojiEvents";
 
-function VideoCard({ movie }) {
+const VideoCard = forwardRef(({ movie }, ref) => {
   return (
-    <div className="videoCard">
+    <div ref={ref} className="videoCard">
       <img src={movie.Poster} alt=" movie poster" />
 
       <h3 className="videoCard__title">{movie.Title}</h3>
@@ -17,6 +17,6 @@ function VideoCard({ movie }) {
       </div>
     </div>
   );
-}
+});
 
 export default VideoCard;

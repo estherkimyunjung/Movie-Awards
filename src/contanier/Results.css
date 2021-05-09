@@ -13,7 +13,7 @@
 .results > h2 > em {
   font-size: 25px;
 }
-.results__poster {
+.results__poster > div {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
