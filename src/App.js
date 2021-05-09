@@ -3,19 +3,19 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { Button, Spinner } from "react-bootstrap";
 import keys from "./api/keys";
 import "./App.css";
-import Header from "./componet/Header";
-import Banner from "./componet/Banner";
-import Results from "./contanier/Results";
-import Footer from "./componet/Footer";
+import Header from "./components/Header";
+import Banner from "./components/Banner";
+import Results from "./containers/Results";
+import Footer from "./components/Footer";
 
-function App() {
-  const [movies, setMovies] = useState();
-  const [isLoading, setIsLoading] = useState(true);
+const App = () => {
+  const [movies, setMovies] = useState([]);
   const [searchValue, setSearchValue] = useState("family");
+  const [isLoading, setIsLoading] = useState(true);
   const [nominations, setNominations] = useState([]);
   const [isDisplay, setIsDisplay] = useState(false);
 
-  const getMovieRequest = async () => {
+  const getMovieRequest = async (searchValue) => {
     const url = `http://www.omdbapi.com/?type=movie&s=${searchValue}&apikey=${keys.API_KEY}`;
 
     const response = await fetch(url);
@@ -82,8 +82,7 @@ function App() {
               <Results
                 movies={movies}
                 searchValue={searchValue}
-                removeNomination={removeNomination}
-                addNomination={addNomination}
+                handleNomination={addNomination}
               />
             </Route>
             {/* <Route path="/nominations">
@@ -98,8 +97,7 @@ function App() {
             <Results
               movies={nominations}
               searchValue={"Your Nominations"}
-              removeNomination={removeNomination}
-              addNomination={addNomination}
+              handleNomination={removeNomination}
             />
           ) : null}
           <Footer />
@@ -107,6 +105,6 @@ function App() {
       )}
     </div>
   );
-}
+};
 
 export default App;

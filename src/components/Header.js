@@ -9,7 +9,7 @@ import VideoLibraryIcon from "@material-ui/icons/VideoLibrary";
 import SearchIcon from "@material-ui/icons/Search";
 import PersonOutlineIcon from "@material-ui/icons/PersonOutline";
 
-function Header({ searchValue, setSearchValue }) {
+const Header = ({ searchValue, setSearchValue }) => {
   const [showSearch, setShowSearch] = useState(false);
 
   return (
@@ -55,6 +55,6 @@ function Header({ searchValue, setSearchValue }) {
       <img src="./logo425.png" alt="logo" />
     </div>
   );
-}
+};
 
 export default Header;
