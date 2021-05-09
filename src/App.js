@@ -13,21 +13,20 @@ function App() {
   const [isLoading, setIsLoading] = useState(true);
   const [searchValue, setSearchValue] = useState("family");
 
-  const getMovieRequest = async () => {
-    // const url = `http://www.omdbapi.com/?s=star wars&apikey=${keys.API_KEY}&type=movie&s=${this.state.searchTerms}&page=1`;
-    const url = `http://www.omdbapi.com/?s=${searchValue}&type=movie&apikey=${keys.API_KEY}`;
-
-    const response = await fetch(url);
-    const responseJson = await response.json();
-
-    if (responseJson.Search) {
-      // console.log(responseJson.Search);
-      setMovies(responseJson.Search);
-    }
-    setIsLoading(false);
-  };
-
   useEffect(() => {
+    const getMovieRequest = async () => {
+      // const url = `http://www.omdbapi.com/?s=star wars&apikey=${keys.API_KEY}&type=movie&s=${this.state.searchTerms}&page=1`;
+      const url = `http://www.omdbapi.com/?s=${searchValue}&type=movie&apikey=${keys.API_KEY}`;
+
+      const response = await fetch(url);
+      const responseJson = await response.json();
+
+      if (responseJson.Search) {
+        // console.log(responseJson.Search);
+        setMovies(responseJson.Search);
+      }
+      setIsLoading(false);
+    };
     getMovieRequest();
   }, [searchValue]);
 
@@ -57,6 +56,9 @@ function App() {
             </Route>
             <Route path="/nominations">
               <Results movies={movies} />
+            </Route>
+            <Route path="/">
+              <Results searchValue={searchValue} movies={movies} />
             </Route>
           </Switch>
           {/* Footer */}

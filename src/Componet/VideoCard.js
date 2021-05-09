@@ -5,7 +5,7 @@ import EmojiEventsIcon from "@material-ui/icons/EmojiEvents";
 function VideoCard({ movie }) {
   return (
     <div className="videoCard">
-      <img src={movie.Poster} alt="poster" />
+      <img src={movie.Poster} alt=" movie poster" />
 
       <h3 className="videoCard__title">{movie.Title}</h3>
       <div className="videoCard__info">

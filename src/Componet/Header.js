@@ -17,7 +17,7 @@ function Header({ searchValue, setSearchValue }) {
       <div className="header__icons">
         {/* All icons Here */}
         <div className="header__icon header__icon--active">
-          <Link className="header__link" to="/movies">
+          <Link className="header__link" to="/">
             <HomeIcon />
             <p>Home</p>
           </Link>
