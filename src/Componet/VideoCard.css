@@ -27,14 +27,25 @@
   display: flex;
 }
 
-.videoCard__info > button {
+.videoCard__info > .videoCard__nominated {
   display: flex;
   align-items: center;
   margin-left: 52px;
   text-transform: inherit !important;
+  background-color: #35322d;
+  color: #000;
+  font-size: 16px;
+}
+
+.videoCard__info > .videoCard__makeNominate {
+  display: flex;
+  align-items: center;
+  margin-left: 28px;
+  text-transform: inherit !important;
   background-color: #e8910d;
   color: #000;
   font-size: 16px;
+  cursor: pointer;
 }
 
 .videoCard__info > button:hover {
