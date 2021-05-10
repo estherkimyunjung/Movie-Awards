@@ -1,7 +1,7 @@
 import React from "react";
 import "./Footer.css";
 
-function Footer() {
+const Footer = () => {
   return (
     <div className="footer">
       <h5>Questions? Call 832-682-5811</h5>
@@ -13,6 +13,6 @@ function Footer() {
       <p className="footer__lastContent">Thank You</p>
     </div>
   );
-}
+};
 
 export default Footer;

@@ -3,19 +3,19 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { Button, Spinner } from "react-bootstrap";
 import keys from "./api/keys";
 import "./App.css";
-import Header from "./componet/Header";
-import Banner from "./componet/Banner";
-import Results from "./contanier/Results";
-import Footer from "./componet/Footer";
+import Header from "./components/Header";
+import Banner from "./components/Banner";
+import Results from "./containers/Results";
+import Footer from "./components/Footer";
 
-function App() {
-  const [movies, setMovies] = useState();
-  const [isLoading, setIsLoading] = useState(true);
+const App = () => {
+  const [movies, setMovies] = useState([]);
   const [searchValue, setSearchValue] = useState("family");
+  const [isLoading, setIsLoading] = useState(true);
   const [nominations, setNominations] = useState([]);
   const [isDisplay, setIsDisplay] = useState(false);
 
-  const getMovieRequest = async () => {
+  const getMovieRequest = async (searchValue) => {
     const url = `http://www.omdbapi.com/?type=movie&s=${searchValue}&apikey=${keys.API_KEY}`;
 
     const response = await fetch(url);
@@ -30,30 +30,38 @@ function App() {
 
   useEffect(() => {
     getMovieRequest(searchValue);
-    // addNomination(nominations);
-    // removeNomination(nominations);
-  }, [searchValue, nominations]);
+  }, [searchValue]);
+
+  useEffect(() => {
+    const movieNominations = JSON.parse(localStorage.getItem("my-nomination"));
+    setNominations(movieNominations);
+  }, []);
+
+  const saveToLocalStorage = (items) => {
+    localStorage.setItem("my-nomination", JSON.stringify(items));
+  };
 
   const addNomination = (movie) => {
     if (nominations.length === 4) {
       setIsDisplay(true);
       let newNominations = [...nominations, movie];
       setNominations(newNominations);
+      saveToLocalStorage(newNominations);
     } else if (nominations.length >= 5) {
       alert("No additional nominations allowed");
     } else {
       let newNominations = [...nominations, movie];
       setNominations(newNominations);
+      saveToLocalStorage(newNominations);
     }
   };
 
   const removeNomination = (movie) => {
-    let index = nominations.indexOf(movie);
-    if (index !== -1) {
-      nominations.splice(index, 1);
-      let newNominations = [...nominations];
-      setNominations(newNominations);
-    }
+    const newNominations = nominations.filter(
+      (nomination) => nomination.imdbID !== movie.imdbID
+    );
+    setNominations(newNominations);
+    saveToLocalStorage(newNominations);
   };
 
   console.log("APP", nominations);
@@ -82,15 +90,22 @@ function App() {
               <Results
                 movies={movies}
                 searchValue={searchValue}
-                removeNomination={removeNomination}
-                addNomination={addNomination}
+                handleNomination={addNomination}
               />
             </Route>
-            {/* <Route path="/nominations">
-              {isDisplay ? <Results nominations={nominations} /> : null}
-            </Route> */}
+            <Route path="/nominations">
+              <Results
+                movies={nominations}
+                searchValue={"Your Nominations"}
+                handleNomination={removeNomination}
+              />
+            </Route>
             <Route path="/">
-              <Results searchValue={searchValue} movies={movies} />
+              <Results
+                movies={nominations}
+                searchValue={"Your Nominations"}
+                handleNomination={removeNomination}
+              />
             </Route>
           </Switch>
           {/* Footer */}
@@ -98,8 +113,7 @@ function App() {
             <Results
               movies={nominations}
               searchValue={"Your Nominations"}
-              removeNomination={removeNomination}
-              addNomination={addNomination}
+              handleNomination={removeNomination}
             />
           ) : null}
           <Footer />
@@ -107,6 +121,6 @@ function App() {
       )}
     </div>
   );
-}
+};
 
 export default App;

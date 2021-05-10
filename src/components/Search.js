@@ -4,7 +4,7 @@ import "./Search.css";
 import { Button } from "@material-ui/core";
 import MovieIcon from "@material-ui/icons/Movie";
 
-function Search({ searchValue, setSearchValue, value }) {
+const Search = ({ searchValue, setSearchValue, value }) => {
   const history = useHistory();
 
   return (
@@ -24,6 +24,6 @@ function Search({ searchValue, setSearchValue, value }) {
       </Button>
     </div>
   );
-}
+};
 
 export default Search;

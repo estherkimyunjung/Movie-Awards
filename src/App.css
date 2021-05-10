@@ -8,6 +8,7 @@
 
 .app {
   width: 100vw;
+  height: auto;
   background-image: linear-gradient(to right, #051412, #042727);
 }
 
