@@ -93,11 +93,19 @@ const App = () => {
                 handleNomination={addNomination}
               />
             </Route>
-            {/* <Route path="/nominations">
-              {isDisplay ? <Results nominations={nominations} /> : null}
-            </Route> */}
+            <Route path="/nominations">
+              <Results
+                movies={nominations}
+                searchValue={"Your Nominations"}
+                handleNomination={removeNomination}
+              />
+            </Route>
             <Route path="/">
-              <Results searchValue={searchValue} movies={movies} />
+              <Results
+                movies={nominations}
+                searchValue={"Your Nominations"}
+                handleNomination={removeNomination}
+              />
             </Route>
           </Switch>
           {/* Footer */}
