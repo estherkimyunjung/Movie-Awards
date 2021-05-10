@@ -30,30 +30,38 @@ const App = () => {
 
   useEffect(() => {
     getMovieRequest(searchValue);
-    // addNomination(nominations);
-    // removeNomination(nominations);
-  }, [searchValue, nominations]);
+  }, [searchValue]);
+
+  useEffect(() => {
+    const movieNominations = JSON.parse(localStorage.getItem("my-nomination"));
+    setNominations(movieNominations);
+  }, []);
+
+  const saveToLocalStorage = (items) => {
+    localStorage.setItem("my-nomination", JSON.stringify(items));
+  };
 
   const addNomination = (movie) => {
     if (nominations.length === 4) {
       setIsDisplay(true);
       let newNominations = [...nominations, movie];
       setNominations(newNominations);
+      saveToLocalStorage(newNominations);
     } else if (nominations.length >= 5) {
       alert("No additional nominations allowed");
     } else {
       let newNominations = [...nominations, movie];
       setNominations(newNominations);
+      saveToLocalStorage(newNominations);
     }
   };
 
   const removeNomination = (movie) => {
-    let index = nominations.indexOf(movie);
-    if (index !== -1) {
-      nominations.splice(index, 1);
-      let newNominations = [...nominations];
-      setNominations(newNominations);
-    }
+    const newNominations = nominations.filter(
+      (nomination) => nomination.imdbID !== movie.imdbID
+    );
+    setNominations(newNominations);
+    saveToLocalStorage(newNominations);
   };
 
   console.log("APP", nominations);
