@@ -2,6 +2,9 @@ import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { Button, Spinner } from "react-bootstrap";
 import keys from "./api/keys";
+import db from "./firebase";
+import { auth, provider } from "./firebase";
+
 import "./App.css";
 import Header from "./components/Header";
 import Banner from "./components/Banner";
@@ -14,6 +17,7 @@ const App = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [nominations, setNominations] = useState([]);
   const [isDisplay, setIsDisplay] = useState(false);
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
 
   const getMovieRequest = async (searchValue) => {
     const url = `http://www.omdbapi.com/?type=movie&s=${searchValue}&apikey=${keys.API_KEY}`;
@@ -26,6 +30,13 @@ const App = () => {
       setMovies(responseJson.Search);
     }
     setIsLoading(false);
+  };
+
+  const signOut = () => {
+    auth.signOut().then(() => {
+      localStorage.removeItem("user");
+      setUser(null);
+    });
   };
 
   useEffect(() => {
@@ -81,7 +92,13 @@ const App = () => {
       ) : (
         <Router>
           {/* Header - Navbar and Logo */}
-          <Header searchValue={searchValue} setSearchValue={setSearchValue} />
+          <Header
+            searchValue={searchValue}
+            setSearchValue={setSearchValue}
+            setUser={setUser}
+            user={user}
+            signOut={signOut}
+          />
           {/* Banner */}
           <Banner />
           {/* Main - Movie list */}

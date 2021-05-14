@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { auth, provider } from "../firebase";
+
 import "./Header.css";
 import Search from "./Search";
 import HomeIcon from "@material-ui/icons/Home";
@@ -9,8 +11,25 @@ import VideoLibraryIcon from "@material-ui/icons/VideoLibrary";
 import SearchIcon from "@material-ui/icons/Search";
 import PersonOutlineIcon from "@material-ui/icons/PersonOutline";
 
-const Header = ({ searchValue, setSearchValue }) => {
+// const Header = ({ searchValue, setSearchValue, setUser, user, signOut }) => {
+const Header = (props) => {
   const [showSearch, setShowSearch] = useState(false);
+
+  const signIn = () => {
+    auth
+      .signInWithPopup(provider)
+      .then((result) => {
+        const newUser = {
+          name: result.user.displayName,
+          photo: result.user.photoURL,
+        };
+        localStorage.setItem("user", JSON.stringify(newUser));
+        props.setUser(newUser);
+      })
+      .catch((error) => {
+        alert(error.message);
+      });
+  };
 
   return (
     <div className="header">
@@ -22,10 +41,12 @@ const Header = ({ searchValue, setSearchValue }) => {
             <p>Home</p>
           </div>
         </Link>
-        <div className="header__icon">
-          <PersonOutlineIcon />
-          <p>Login</p>
-        </div>
+        <Link className="header__link" to="/login">
+          <div className="header__icon" onClick={() => signIn()}>
+            <PersonOutlineIcon />
+            {props.user.name ? <p>{props.user.name}</p> : <p>Login</p>}
+          </div>
+        </Link>
         <Link className="header__link" to="/nominations">
           <div className="header__icon">
             <EmojiEventsIcon />
@@ -40,7 +61,10 @@ const Header = ({ searchValue, setSearchValue }) => {
         </Link>
         <div className="header__icon">
           {showSearch && (
-            <Search searchValue={searchValue} setSearchValue={setSearchValue} />
+            <Search
+              searchValue={props.searchValue}
+              setSearchValue={props.setSearchValue}
+            />
           )}
           <SearchIcon
             onClick={() => setShowSearch(!showSearch)}
